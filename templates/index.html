@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-9">
+    <div>
+      <div class="box box-solid">
+        <div class="box-body">
+            <div id="busmap"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        <div class="box-body">
+          <div id="numVehiclesTable">
+              <table class="table">
+            <thead>
+            <tr>
+              <th>Color</th>
+              <th>Direction</th>
+              <th>Number of vehicles</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for d in direction_colors %}
+            <tr>
+                <td><span style="background-color:{{ d['color'] }};"></span></td>
+                <td>{{ '{}bound'.format(d['text']) }}</td>
+                <td id="{{ 'routes-{}bound'.format(d['text'].lower()) }}"></td>
+            </tr>
+            {% endfor %}
+            <tr class="active">
+              <td></td>
+              <td>Total</td>
+              <td id="routes-total"></td>
+            </tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div>
+      <div class="box box-warning">
+        <div class="box-body">
+            <div id="routeSelect">
+                <div class="form-group">
+                    <label class="control-label" for="route-number">Route</label>
+                    <div>
+                        <select class="route-number-select" id="route-number"></select>
+                    </div>
+                </div>
+            </div>
+          <div id="directions" class="form-group">
+            <label class="control-label" for="directions">Show</label>
+            <div>
+                {% for d in direction_colors %}
+                <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="direction" value="{{ d['id'] }}" checked="checked"/>
+                    <span>{{ '{}bound'.format(d['text']) }}</span>
+                </label>
+                </div>
+                {% endfor %}
+            </div>
+          </div>
+          <p class="text-muted">Note: a route number can have several different trips, each with a different path.
+              Only the most commonly-used path will be displayed on the map.</p>
+          <button id="zoomButton" type="button" class="btn btn-default action-button">Zoom to fit buses</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="box box-warning">
+        <div class="box-body">
+          <div class="form-group">
+            <label class="control-label" for="interval">Refresh interval</label>
+            <div>
+                <select class="interval-select" id="interval"></select>
+            </div>
+          </div>
+          <div id="timeSinceLastUpdate"><p class="text-muted"></p></div>
+          <button id="refresh" type="button" class="btn btn-default action-button">Refresh now</button>
+          <p class="text-muted"><br/>Source data updates every 30 seconds.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

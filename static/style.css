@@ -1,0 +1,13 @@
+#busmap {
+    width: 100%;
+    height: 500px;
+    visibility: inherit;
+    position: relative;
+}
+
+#numVehiclesTable span {
+    width:1.1em;
+    height:1.1em;
+    display:inline-block;
+}
+
