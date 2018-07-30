@@ -1,5 +1,10 @@
 from flask import Flask, render_template, jsonify
 import methods
+import warnings
+
+# per https://stackoverflow.com/questions/40845304/runtimewarning-numpy-dtype-size-changed-may-indicate-binary-incompatibility
+warnings.filterwarnings("ignore", message="numpy.dtype size changed")
+warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 
 
 application = Flask(__name__)
